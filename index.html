@@ -1,202 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0d12">
+  <meta name="theme-color" content="#020617">
   <meta name="description" content="The personal portfolio of MD. Shahriar Hossain Joy, a student from Bangladesh interested in gaming, technology, business, coding, and trading.">
   <title>Joy — Student & Digital Explorer</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#ff9f1c',
+              light: '#ffc266',
+              dark: '#e08914',
+              glow: 'rgba(255, 159, 28, 0.15)'
+            },
+            surface: {
+              DEFAULT: '#0f172a', /* slate-900 */
+              elevated: '#1e293b', /* slate-800 */
+            }
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'spin-slow': 'spin 12s linear infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0) rotate(3deg)' },
+              '50%': { transform: 'translateY(-15px) rotate(1deg)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    :root {
-      --bg:#0b0d12; --panel:#131720; --panel2:#181d28;
-      --text:#f4f6fb; --muted:#a4adbd; --accent:#ff9f1c;
-      --accent2:#ffc266; --line:rgba(255,255,255,.09);
-      --radius:20px; --max:1100px;
+    /* Custom utility styles that are complex for standard Tailwind classes */
+    body {
+      background-color: #020617; /* slate-950 */
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(255, 159, 28, 0.04), transparent 25vw),
+        radial-gradient(circle at 85% 30%, rgba(255, 159, 28, 0.08), transparent 25vw);
+      color: #f8fafc;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;scroll-padding-top:90px}
-    body{
-      background:radial-gradient(ellipse at 85% 0%,rgba(255,159,28,.10),transparent 32rem),var(--bg);
-      color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      line-height:1.65;overflow-x:hidden
+    
+    .glass-panel {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.7));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
-    a{color:inherit;text-decoration:none}
-    button,a{-webkit-tap-highlight-color:transparent}
-    .container{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
-    .nav-wrap{position:sticky;top:0;z-index:10;backdrop-filter:blur(18px);background:rgba(11,13,18,.84);border-bottom:1px solid var(--line)}
-    nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}
-    .brand{font-size:1rem;font-weight:850;letter-spacing:-.04em}.brand span{color:var(--accent)}
-    .nav-links{display:flex;align-items:center;gap:26px;color:var(--muted);font-size:.9rem}
-    .nav-links a:hover{color:var(--accent2)}
-    .menu-btn{display:none;border:1px solid var(--line);color:var(--text);background:var(--panel);border-radius:12px;padding:9px 12px;font-size:1.1rem}
-    .hero{min-height:660px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:52px;padding-block:85px}
-    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--accent2);background:rgba(255,159,28,.08);border:1px solid rgba(255,159,28,.22);padding:7px 12px;border-radius:999px;font-size:.78rem;font-weight:750;letter-spacing:.09em;text-transform:uppercase}
-    .status-dot{width:7px;height:7px;border-radius:50%;background:#70e1a1;box-shadow:0 0 12px #70e1a166}
-    h1{font-size:clamp(3rem,7vw,5.6rem);line-height:.99;letter-spacing:-.075em;margin:25px 0}
-    .accent{color:var(--accent)}
-    .hero-copy{max-width:590px;color:var(--muted);font-size:clamp(1rem,2vw,1.12rem)}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:32px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 19px;border-radius:12px;font-weight:800;font-size:.92rem;border:1px solid transparent;transition:transform .2s,background .2s,border-color .2s}
-    .btn:hover{transform:translateY(-3px)}.btn-primary{background:var(--accent);color:#17120a}.btn-primary:hover{background:var(--accent2)}
-    .btn-secondary{border-color:var(--line);background:rgba(255,255,255,.025)}.btn-secondary:hover{border-color:rgba(255,159,28,.45)}
-    .hero-meta{display:flex;gap:24px;margin-top:36px;color:var(--muted);font-size:.83rem;flex-wrap:wrap}
-    .hero-meta strong{color:var(--text);display:block;font-size:1.03rem}
-    .visual{position:relative;display:grid;place-items:center;min-height:390px}
-    .orbit{position:absolute;width:min(100%,390px);aspect-ratio:1;border:1px solid rgba(255,159,28,.20);border-radius:50%;transform:rotate(-20deg)}
-    .orbit:before,.orbit:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.07);border-radius:50%;inset:22px}
-    .orbit:after{inset:48px}
-    .profile-card{position:relative;z-index:1;width:min(84%,310px);padding:25px;border:1px solid rgba(255,255,255,.13);border-radius:28px;background:linear-gradient(145deg,rgba(30,36,49,.96),rgba(15,18,26,.96));box-shadow:0 30px 90px #0008,inset 0 1px 0 #ffffff0b;transform:rotate(3deg)}
-    .avatar{width:100%;aspect-ratio:1.08;border-radius:20px;display:grid;place-items:center;background:radial-gradient(circle at 50% 30%,#ffbd5b,#d97706 46%,#39200d 100%);color:#17120a;font-size:5rem;font-weight:950;letter-spacing:-.1em;overflow:hidden}
-    .profile-card h2{font-size:1.35rem;margin-top:20px;letter-spacing:-.04em}.profile-card p{color:var(--muted);font-size:.9rem}
-    .mini-badge{position:absolute;z-index:2;background:var(--panel2);border:1px solid var(--line);padding:12px 15px;border-radius:14px;box-shadow:0 15px 35px #0005;font-size:.82rem;font-weight:750}
-    .badge-one{top:13%;right:0}.badge-two{bottom:12%;left:-2%}
-    .section{padding-block:85px}
-    .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:32px}
-    .kicker{color:var(--accent);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:850}
-    h2.section-title{font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.06em;line-height:1.1;margin-top:8px}
-    .section-intro{max-width:430px;color:var(--muted)}
-    .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px}
-    .panel{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));padding:28px}
-    .about-highlight{display:flex;flex-direction:column;justify-content:space-between;min-height:260px}
-    .quote-mark{color:var(--accent);font-size:3.6rem;line-height:1;font-weight:900}
-    .about-highlight p{font-size:1.2rem;font-weight:700;letter-spacing:-.025em}
-    .about-text{color:var(--muted)}.about-text p+p{margin-top:14px}
-    .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
-    .chip{border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:#d9deea;background:rgba(255,255,255,.025);font-size:.8rem}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .skill-card{padding:23px}.icon-box{width:45px;height:45px;display:grid;place-items:center;border-radius:13px;color:var(--accent);background:rgba(255,159,28,.10);font-size:1.35rem;margin-bottom:20px}
-    .skill-card h3,.project-card h3{font-size:1.1rem;margin-bottom:8px}.skill-card p,.project-card p{color:var(--muted);font-size:.9rem}
-    .project-card{overflow:hidden;padding:0}.project-art{min-height:170px;display:grid;place-items:center;font-size:3rem;color:var(--accent);background:radial-gradient(circle at 70% 30%,#53320f,#20202a 60%,#12151d);border-bottom:1px solid var(--line)}
-    .project-content{padding:23px}.project-type{display:inline-block;color:var(--accent2);font-size:.72rem;letter-spacing:.12em;font-weight:850;text-transform:uppercase;margin-bottom:10px}
-    .socials{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-    .social-link{display:inline-flex;align-items:center;gap:9px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025);font-size:.88rem;font-weight:750;transition:border-color .2s,transform .2s}
-    .social-link:hover{border-color:rgba(255,159,28,.5);transform:translateY(-2px)}
-    .contact-box{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:clamp(25px,5vw,48px);border:1px solid rgba(255,159,28,.24);border-radius:25px;background:radial-gradient(ellipse at 100% 0%,rgba(255,159,28,.13),transparent 55%),var(--panel)}
-    .contact-box p{color:var(--muted);max-width:550px;margin-top:12px}
-    .comments-panel{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));padding:clamp(20px,4vw,34px)}
-    .comments-panel .section-title{margin-bottom:10px}
-    .comments-description{color:var(--muted);margin:12px 0 24px;max-width:650px}
-    .giscus{min-height:120px}
-    .giscus-frame{width:100%}
-    footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:.82rem}
-    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:16px}.footer-inner span{color:var(--accent2)}
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:translateY(0)}
-    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}.reveal{opacity:1;transform:none}}
-    @media(max-width:760px){
-      .container{width:min(var(--max),calc(100% - 30px))}nav{min-height:68px}.menu-btn{display:block}
-      .nav-links{display:none;position:absolute;left:15px;right:15px;top:75px;padding:16px;border:1px solid var(--line);border-radius:15px;background:#11151e;flex-direction:column;align-items:stretch;gap:0}
-      .nav-links.open{display:flex}.nav-links a{padding:11px 8px}
-      .hero{min-height:auto;grid-template-columns:1fr;gap:25px;padding-block:70px 45px}.visual{min-height:360px}.orbit{width:min(88%,330px)}
-      .badge-one{right:2%}.badge-two{left:1%}.section{padding-block:65px}.section-head{display:block}.section-intro{margin-top:15px}
-      .about-grid,.cards{grid-template-columns:1fr}.contact-box{align-items:flex-start;flex-direction:column}
+    
+    .glass-panel:hover {
+      border-color: rgba(255, 159, 28, 0.3);
     }
+
+    .text-gradient {
+      background: linear-gradient(to right, #ff9f1c, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
   </style>
 </head>
-<body>
-  <div class="nav-wrap">
-    <nav class="container" aria-label="Main navigation">
-      <a class="brand" href="#home">JOY<span>.</span></a>
-      <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="#about">About</a><a href="#skills">Skills</a><a href="#interests">Interests</a><a href="#projects">Projects</a><a href="#comments">Comments</a><a href="#contact">Contact</a>
+<body class="antialiased selection:bg-brand selection:text-white relative overflow-x-hidden">
+
+  <!-- Navigation -->
+  <header class="fixed top-0 inset-x-0 z-50 transition-all duration-300 backdrop-blur-md bg-slate-950/80 border-b border-white/5" id="navbar">
+    <nav class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#home" class="font-display font-bold text-xl tracking-tight flex items-center gap-1 group">
+        JOY<span class="text-brand transition-transform group-hover:scale-125 inline-block">.</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-brand-light transition-colors">About</a>
+        <a href="#skills" class="hover:text-brand-light transition-colors">Skills</a>
+        <a href="#interests" class="hover:text-brand-light transition-colors">Interests</a>
+        <a href="#projects" class="hover:text-brand-light transition-colors">Projects</a>
+        <a href="#comments" class="hover:text-brand-light transition-colors">Comments</a>
+        <a href="#contact" class="px-4 py-2 rounded-full border border-white/10 hover:border-brand/50 hover:bg-brand/5 transition-all text-white">Contact</a>
       </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden p-2 text-slate-300 hover:text-white transition-colors" id="menuBtn" aria-label="Toggle menu">
+        <i data-lucide="menu"></i>
+      </button>
     </nav>
-  </div>
 
-  <main>
-    <section class="hero container" id="home">
-      <div>
-        <div class="eyebrow"><span class="status-dot"></span> Student · Bangladesh</div>
-        <h1>Hey, I'm<br><span class="accent">Shahriar Joy.</span></h1>
-        <p class="hero-copy">
-          I'm <strong>MD. Shahriar Hossain Joy</strong>, a student interested in gaming,
-          technology, and business. I enjoy exploring new ideas and building my skills in coding and beyond.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#interests">Explore my world <span aria-hidden="true">↗</span></a>
-          <a class="btn btn-secondary" href="#contact">Connect with me</a>
-        </div>
-        <div class="hero-meta">
-          <div><strong>Gaming</strong>Play · Explore · Learn</div>
-          <div><strong>Coding</strong>Create new things</div>
-          <div><strong>Growth</strong>Always learning</div>
-        </div>
+    <!-- Mobile Nav Dropdown -->
+    <div class="md:hidden absolute top-20 left-0 w-full bg-slate-900 border-b border-white/10 overflow-hidden transition-all duration-300 max-h-0" id="mobileMenu">
+      <div class="px-6 py-4 flex flex-col gap-4 text-slate-300 font-medium pb-6 shadow-2xl">
+        <a href="#about" class="mobile-link py-2 border-b border-white/5">About</a>
+        <a href="#skills" class="mobile-link py-2 border-b border-white/5">Skills</a>
+        <a href="#interests" class="mobile-link py-2 border-b border-white/5">Interests</a>
+        <a href="#projects" class="mobile-link py-2 border-b border-white/5">Projects</a>
+        <a href="#comments" class="mobile-link py-2 border-b border-white/5">Comments</a>
+        <a href="#contact" class="mobile-link py-2 text-brand">Contact Me</a>
       </div>
-      <div class="visual" aria-label="Decorative initials card">
-        <div class="orbit"></div>
-        <div class="mini-badge badge-one">✦ Curious by nature</div>
-        <div class="profile-card">
-          <div class="avatar" aria-label="Joy's initials">J</div>
-          <h2>MD. Shahriar Hossain Joy</h2>
-          <p>Student · Gamer · Technology enthusiast</p>
+    </div>
+  </header>
+
+  <main class="pt-20">
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-[90vh] flex items-center max-w-6xl mx-auto px-6 py-20">
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-8 items-center w-full">
+        
+        <!-- Hero Text -->
+        <div class="z-10 order-2 lg:order-1 reveal">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand-light text-xs font-bold uppercase tracking-wider mb-6">
+            <span class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.6)] animate-pulse-slow"></span>
+            Student · Bangladesh
+          </div>
+          
+          <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6">
+            Hey, I'm <br>
+            <span class="text-gradient">Shahriar Joy.</span>
+          </h1>
+          
+          <p class="text-slate-400 text-lg md:text-xl max-w-lg mb-8 leading-relaxed">
+            I'm a student interested in <span class="text-slate-200">gaming, technology, and business</span>. I enjoy exploring new ideas and building my skills in the digital world.
+          </p>
+          
+          <div class="flex flex-wrap gap-4 items-center mb-12">
+            <a href="#interests" class="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-slate-950 px-6 py-3.5 rounded-xl font-bold transition-all hover:-translate-y-1 shadow-lg shadow-brand/25">
+              Explore my world <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#contact" class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white px-6 py-3.5 rounded-xl font-semibold transition-all hover:-translate-y-1">
+              Connect with me
+            </a>
+          </div>
+
+          <!-- Mini stats/meta -->
+          <div class="flex gap-8 text-sm text-slate-400 border-t border-white/5 pt-8">
+            <div>
+              <strong class="block text-white text-base mb-1 font-display">Gaming</strong>
+              Play · Explore
+            </div>
+            <div>
+              <strong class="block text-white text-base mb-1 font-display">Coding</strong>
+              Create things
+            </div>
+            <div>
+              <strong class="block text-white text-base mb-1 font-display">Growth</strong>
+              Keep learning
+            </div>
+          </div>
         </div>
-        <div class="mini-badge badge-two">↗ Learning something new</div>
+
       </div>
     </section>
 
-    <section class="section container reveal" id="about">
-      <div class="section-head">
-        <div><div class="kicker">Get to know me</div><h2 class="section-title">A little about <span class="accent">Joy.</span></h2></div>
-        <p class="section-intro">A student from Bangladesh with a curious mind and an interest in the digital world.</p>
+    <!-- About Section -->
+    <section id="about" class="py-24 max-w-6xl mx-auto px-6 relative">
+      <div class="mb-12 reveal">
+        <h2 class="text-brand font-bold text-sm tracking-widest uppercase mb-3">Get to know me</h2>
+        <h3 class="font-display text-4xl md:text-5xl font-bold mb-4">A little about <span class="text-gradient">Joy.</span></h3>
+        <p class="text-slate-400 max-w-lg">A student from Bangladesh with a curious mind and an interest in the digital world.</p>
       </div>
-      <div class="about-grid">
-        <div class="panel about-highlight">
-          <div class="quote-mark">“</div>
-          <p>Explore more. Learn continuously. Turn curiosity into skills.</p>
-          <div class="chips"><span class="chip">Gaming</span><span class="chip">Technology</span><span class="chip">Business</span></div>
+
+      <div class="grid md:grid-cols-12 gap-6 reveal">
+        <!-- Highlight Box -->
+        <div class="md:col-span-5 glass-panel rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden group">
+          <div class="absolute top-0 right-0 p-8 opacity-10 text-brand">
+            <i data-lucide="quote" class="w-24 h-24 transform rotate-180 group-hover:scale-110 transition-transform duration-500"></i>
+          </div>
+          
+          <p class="font-display text-2xl md:text-3xl font-bold leading-tight relative z-10 mb-12">
+            Explore more. Learn continuously. Turn curiosity into skills.
+          </p>
+          
+          <div class="flex flex-wrap gap-2 relative z-10">
+            <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">Gaming</span>
+            <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">Technology</span>
+            <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">Business</span>
+          </div>
         </div>
-        <div class="panel about-text">
-          <p>I'm MD. Shahriar Hossain Joy, a student based in Bangladesh. I'm interested in gaming, technology, and business, and I like discovering how digital things work.</p>
-          <p>I'm also exploring coding and trading as areas to learn about. This website is my personal space on the internet—a place to introduce myself and share my interests as I grow.</p>
-          <p><strong style="color:var(--text)">Currently:</strong> learning, experimenting, and working toward new goals.</p>
+
+        <!-- Text Content -->
+        <div class="md:col-span-7 glass-panel rounded-3xl p-8 lg:p-10 flex flex-col justify-center gap-6 text-slate-300 leading-relaxed">
+          <p>
+            I'm <strong>MD. Shahriar Hossain Joy</strong>, a student based in Bangladesh. I'm deeply interested in gaming, technology, and business, and I love discovering how digital ecosystems operate behind the scenes.
+          </p>
+          <p>
+            I'm currently exploring coding and trading as core areas to expand my knowledge base. This website serves as my personal space on the internet—a central hub to introduce myself, document my journey, and share my interests as I grow professionally and personally.
+          </p>
+          <div class="mt-2 p-4 rounded-2xl bg-brand/5 border border-brand/10 flex gap-4 items-start">
+            <div class="bg-brand/20 p-2 rounded-lg text-brand mt-0.5">
+              <i data-lucide="target" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <strong class="block text-white mb-1">Current Focus</strong>
+              <p class="text-sm text-slate-400">Learning fundamentals of web development, experimenting with code, and working toward actionable goals.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section container reveal" id="skills">
-      <div class="section-head">
-        <div><div class="kicker">What I'm exploring</div><h2 class="section-title">My <span class="accent">skills.</span></h2></div>
-        <p class="section-intro">Areas I'm interested in developing. This section can grow as I gain more experience.</p>
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 max-w-6xl mx-auto px-6">
+      <div class="mb-12 reveal">
+        <h2 class="text-brand font-bold text-sm tracking-widest uppercase mb-3">What I'm exploring</h2>
+        <h3 class="font-display text-4xl md:text-5xl font-bold mb-4">My <span class="text-gradient">skills.</span></h3>
+        <p class="text-slate-400 max-w-lg">Areas I'm actively interested in developing. This foundation will grow as I gain more experience.</p>
       </div>
-      <div class="cards">
-        <article class="panel skill-card"><div class="icon-box">🎮</div><h3>Gaming</h3><p>Exploring games, gameplay, and the technology behind interactive worlds.</p></article>
-        <article class="panel skill-card"><div class="icon-box">⌘</div><h3>Coding</h3><p>Learning how to create websites and turn ideas into working digital projects.</p></article>
-        <article class="panel skill-card"><div class="icon-box">↗</div><h3>Trading</h3><p>Learning about markets, risk, and financial concepts through study and practice.</p></article>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 reveal delay-100">
+        <!-- Skill 1 -->
+        <div class="glass-panel p-8 rounded-3xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(255,159,28,0.15)] group">
+          <div class="w-14 h-14 rounded-2xl bg-brand/10 text-brand flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <i data-lucide="gamepad-2" class="w-7 h-7"></i>
+          </div>
+          <h4 class="font-display text-xl font-bold mb-3 text-white">Gaming</h4>
+          <p class="text-slate-400 text-sm leading-relaxed">Exploring game mechanics, gameplay loops, and the innovative technology driving interactive virtual worlds.</p>
+        </div>
+
+        <!-- Skill 2 -->
+        <div class="glass-panel p-8 rounded-3xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(255,159,28,0.15)] group">
+          <div class="w-14 h-14 rounded-2xl bg-brand/10 text-brand flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <i data-lucide="code-2" class="w-7 h-7"></i>
+          </div>
+          <h4 class="font-display text-xl font-bold mb-3 text-white">Coding</h4>
+          <p class="text-slate-400 text-sm leading-relaxed">Learning the syntax and logic required to create websites and turn abstract ideas into functional digital projects.</p>
+        </div>
+
+        <!-- Skill 3 -->
+        <div class="glass-panel p-8 rounded-3xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(255,159,28,0.15)] group">
+          <div class="w-14 h-14 rounded-2xl bg-brand/10 text-brand flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <i data-lucide="trending-up" class="w-7 h-7"></i>
+          </div>
+          <h4 class="font-display text-xl font-bold mb-3 text-white">Trading</h4>
+          <p class="text-slate-400 text-sm leading-relaxed">Studying market structures, risk management, and financial concepts through continuous observation and practice.</p>
+        </div>
       </div>
     </section>
 
-    <section class="section container reveal" id="interests">
-      <div class="section-head">
-        <div><div class="kicker">Things I enjoy</div><h2 class="section-title">My <span class="accent">interests.</span></h2></div>
-        <p class="section-intro">A few topics that keep me curious and motivate me to keep exploring.</p>
+    <!-- Interests Section -->
+    <section id="interests" class="py-24 max-w-6xl mx-auto px-6 bg-slate-900/30 rounded-[3rem] border border-white/5 my-12">
+      <div class="mb-12 reveal">
+        <h2 class="text-brand font-bold text-sm tracking-widest uppercase mb-3">Things I enjoy</h2>
+        <h3 class="font-display text-4xl md:text-5xl font-bold mb-4">My <span class="text-gradient">interests.</span></h3>
+        <p class="text-slate-400 max-w-lg">Topics that keep me naturally curious and motivate me to explore further.</p>
       </div>
-      <div class="cards">
-        <article class="panel skill-card"><div class="icon-box">🕹️</div><h3>Gaming</h3><p>Games, virtual worlds, and memorable gameplay experiences.</p></article>
-        <article class="panel skill-card"><div class="icon-box">⚡</div><h3>Technology</h3><p>Apps, devices, software, and the future of digital experiences.</p></article>
-        <article class="panel skill-card"><div class="icon-box">◈</div><h3>Business</h3><p>Ideas, entrepreneurship, and understanding how businesses work.</p></article>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 reveal">
+        <div class="bg-slate-800/50 p-6 rounded-2xl border border-white/5 flex gap-4 items-start hover:border-brand/30 transition-colors">
+          <div class="p-3 rounded-xl bg-slate-900 text-brand shadow-inner"><i data-lucide="swords" class="w-5 h-5"></i></div>
+          <div>
+            <h4 class="font-bold text-white mb-1">Game Lore</h4>
+            <p class="text-sm text-slate-400">Diving deep into the stories and world-building of vast game universes.</p>
+          </div>
+        </div>
+        <div class="bg-slate-800/50 p-6 rounded-2xl border border-white/5 flex gap-4 items-start hover:border-brand/30 transition-colors">
+          <div class="p-3 rounded-xl bg-slate-900 text-brand shadow-inner"><i data-lucide="cpu" class="w-5 h-5"></i></div>
+          <div>
+            <h4 class="font-bold text-white mb-1">Tech Hardware</h4>
+            <p class="text-sm text-slate-400">Following the latest developments in PC components and smart devices.</p>
+          </div>
+        </div>
+        <div class="bg-slate-800/50 p-6 rounded-2xl border border-white/5 flex gap-4 items-start hover:border-brand/30 transition-colors">
+          <div class="p-3 rounded-xl bg-slate-900 text-brand shadow-inner"><i data-lucide="lightbulb" class="w-5 h-5"></i></div>
+          <div>
+            <h4 class="font-bold text-white mb-1">Startups</h4>
+            <p class="text-sm text-slate-400">Learning how innovative ideas transform into successful businesses.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section container reveal" id="projects">
-      <div class="section-head">
-        <div><div class="kicker">My journey</div><h2 class="section-title">Projects & <span class="accent">progress.</span></h2></div>
-        <p class="section-intro">I'm still building my project collection. This portfolio is the first step—more work can be added here later.</p>
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 max-w-6xl mx-auto px-6">
+      <div class="mb-12 reveal flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <h2 class="text-brand font-bold text-sm tracking-widest uppercase mb-3">My journey</h2>
+          <h3 class="font-display text-4xl md:text-5xl font-bold mb-4">Projects & <span class="text-gradient">progress.</span></h3>
+          <p class="text-slate-400 max-w-lg">I'm currently building my portfolio of work. This site is the very first step.</p>
+        </div>
       </div>
-      <div class="cards">
-        <article class="panel project-card"><div class="project-art" aria-hidden="true">◈</div><div class="project-content"><div class="project-type">Personal website</div><h3>My Portfolio</h3><p>A responsive personal website introducing me, my interests, and the skills I'm developing.</p><a class="project-link" href="#home">You're viewing it ↗</a></div></article>
-        <article class="panel project-card"><div class="project-art" aria-hidden="true">⌘</div><div class="project-content"><div class="project-type">In progress</div><h3>Coding Journey</h3><p>Learning the foundations of web development and working toward future projects.</p><a class="project-link" href="#skills">Explore my skills ↗</a></div></article>
-        <article class="panel project-card"><div class="project-art" aria-hidden="true">✧</div><div class="project-content"><div class="project-type">Coming later</div><h3>Future Projects</h3><p>New ideas and completed projects will be showcased here as they take shape.</p><a class="project-link" href="#contact">Get in touch ↗</a></div></article>
+
+      <div class="grid md:grid-cols-3 gap-6 reveal delay-100">
+        <!-- Project 1 -->
+        <div class="glass-panel rounded-3xl overflow-hidden group flex flex-col">
+          <div class="h-48 bg-slate-900 relative flex items-center justify-center overflow-hidden border-b border-white/10">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,159,28,0.2),transparent_70%)] group-hover:scale-110 transition-transform duration-700"></div>
+            <i data-lucide="layout-template" class="w-16 h-16 text-brand relative z-10"></i>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold tracking-wider text-brand-light uppercase mb-2">Personal Website</span>
+            <h4 class="font-display text-xl font-bold text-white mb-2">My Portfolio</h4>
+            <p class="text-slate-400 text-sm mb-6 flex-grow">A responsive personal hub introducing me, my interests, and the technical skills I am currently developing.</p>
+            <a href="#home" class="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-brand transition-colors w-fit">
+              You're viewing it <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="glass-panel rounded-3xl overflow-hidden group flex flex-col">
+          <div class="h-48 bg-slate-900 relative flex items-center justify-center overflow-hidden border-b border-white/10">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(100,116,139,0.2),transparent_70%)] group-hover:scale-110 transition-transform duration-700"></div>
+            <i data-lucide="terminal-square" class="w-16 h-16 text-slate-400 relative z-10"></i>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold tracking-wider text-slate-400 uppercase mb-2">In Progress</span>
+            <h4 class="font-display text-xl font-bold text-white mb-2">Coding Sandbox</h4>
+            <p class="text-slate-400 text-sm mb-6 flex-grow">Learning the foundations of web development, JavaScript logic, and preparing for interactive applications.</p>
+            <a href="#skills" class="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-brand transition-colors w-fit">
+              Explore my skills <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="glass-panel rounded-3xl overflow-hidden group flex flex-col opacity-60 hover:opacity-100 transition-opacity">
+          <div class="h-48 bg-slate-900 border-b border-white/10 flex items-center justify-center border-dashed">
+            <i data-lucide="plus-circle" class="w-12 h-12 text-slate-600"></i>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <span class="text-xs font-bold tracking-wider text-slate-500 uppercase mb-2">Coming Later</span>
+            <h4 class="font-display text-xl font-bold text-slate-300 mb-2">Future Ideas</h4>
+            <p class="text-slate-500 text-sm mb-6 flex-grow">New concepts, scripts, and completed digital projects will be showcased here as they take shape.</p>
+            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-brand transition-colors w-fit">
+              Get in touch <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section container reveal" id="comments">
-      <div class="section-head">
-        <div><div class="kicker">Join the conversation</div><h2 class="section-title">Leave a <span class="accent">comment.</span></h2></div>
-        <p class="section-intro">Have a thought or suggestion? Share it below. Comments are powered by Giscus and stored in GitHub Discussions.</p>
+    <!-- Comments Section -->
+    <section id="comments" class="py-24 max-w-4xl mx-auto px-6">
+      <div class="text-center mb-10 reveal">
+        <h2 class="text-brand font-bold text-sm tracking-widest uppercase mb-3">Join the conversation</h2>
+        <h3 class="font-display text-4xl md:text-5xl font-bold mb-4">Leave a <span class="text-gradient">comment.</span></h3>
+        <p class="text-slate-400 max-w-lg mx-auto">Have a thought, suggestion, or just want to say hi? Drop a comment below using your GitHub account.</p>
       </div>
-      <div class="comments-panel">
-        <p class="comments-description">Please be respectful and keep comments friendly. You’ll need to authorize with GitHub to post.</p>
-        <div class="giscus"></div>
+      
+      <div class="glass-panel p-4 sm:p-8 rounded-3xl reveal delay-100 min-h-[300px]">
+        <!-- Giscus Integration (Preserved exact attributes) -->
         <script src="https://giscus.app/client.js"
           data-repo="Joy456456/My-portfolio"
           data-repo-id="R_kgDOVNhcLQ"
@@ -207,7 +387,7 @@
           data-reactions-enabled="1"
           data-emit-metadata="0"
           data-input-position="top"
-          data-theme="preferred_color_scheme"
+          data-theme="transparent_dark"
           data-lang="en"
           crossorigin="anonymous"
           async>
@@ -215,54 +395,115 @@
       </div>
     </section>
 
-    <section class="section container reveal" id="contact">
-      <div class="contact-box">
-        <div><div class="kicker">Find me online</div><h2 class="section-title">Let's <span class="accent">connect.</span></h2><p>Follow my online profiles or send me an email. Thanks for visiting my portfolio!</p>
-          <div class="socials">
-            <a class="social-link" href="https://www.facebook.com/profile.php?id=61592486645099" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
-            <a class="social-link" href="https://www.instagram.com/_3498188?exln=dWgxbmFpY2dhZDVr" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-            <a class="social-link" href="https://www.youtube.com/@AANOMALY" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 max-w-6xl mx-auto px-6 reveal">
+      <div class="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-slate-900 to-slate-950 border border-brand/20 p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 shadow-2xl">
+        <!-- Background Glow -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand/10 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <div class="relative z-10 max-w-xl text-center md:text-left">
+          <h2 class="text-brand font-bold text-sm tracking-widest uppercase mb-3">Find me online</h2>
+          <h3 class="font-display text-4xl md:text-5xl font-bold mb-4 text-white">Let's <span class="text-gradient">connect.</span></h3>
+          <p class="text-slate-400 text-lg mb-8">Follow my online profiles or send me an email. I'm always open to discussing new ideas, tech, or just having a good chat.</p>
+          
+          <div class="flex flex-wrap justify-center md:justify-start gap-4">
+            <a href="https://www.facebook.com/profile.php?id=61592486645099" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-brand/50 hover:bg-brand/10 hover:text-brand transition-all font-medium text-slate-300">
+              <i data-lucide="facebook" class="w-5 h-5"></i> Facebook
+            </a>
+            <a href="https://www.instagram.com/_3498188?exln=dWgxbmFpY2dhZDVr" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-brand/50 hover:bg-brand/10 hover:text-brand transition-all font-medium text-slate-300">
+              <i data-lucide="instagram" class="w-5 h-5"></i> Instagram
+            </a>
+            <a href="https://www.youtube.com/@AANOMALY" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-brand/50 hover:bg-brand/10 hover:text-brand transition-all font-medium text-slate-300">
+              <i data-lucide="youtube" class="w-5 h-5"></i> YouTube
+            </a>
           </div>
         </div>
-        <a class="btn btn-primary" href="mailto:shahriarhossenmd18@gmail.com">Email me ↗</a>
+
+        <div class="relative z-10 w-full md:w-auto">
+          <a href="mailto:shahriarhossenmd18@gmail.com" class="flex items-center justify-center gap-3 w-full md:w-auto bg-brand hover:bg-brand-dark text-slate-950 px-8 py-5 rounded-2xl font-bold text-lg transition-all hover:scale-105 shadow-[0_0_30px_rgba(255,159,28,0.3)]">
+            <i data-lucide="mail" class="w-6 h-6"></i> Drop an Email
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> MD. Shahriar Hossain Joy. All rights reserved.</div>
-      <a href="#home">Back to top <span>↑</span></a>
+  <footer class="border-t border-white/10 bg-slate-950 mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500 text-sm">
+      <div class="flex items-center gap-2 font-medium">
+        © <span id="year"></span> <span class="text-slate-300 font-display font-semibold tracking-wide">MD. Shahriar Hossain Joy.</span>
+      </div>
+      <a href="#home" class="flex items-center gap-1 hover:text-brand transition-colors font-medium group">
+        Back to top <i data-lucide="arrow-up" class="w-4 h-4 group-hover:-translate-y-1 transition-transform"></i>
+      </a>
     </div>
   </footer>
+
   <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Mobile Menu Toggle
     const menuBtn = document.getElementById('menuBtn');
-    const navLinks = document.getElementById('navLinks');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let isMenuOpen = false;
+
     menuBtn.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', String(isOpen));
-      menuBtn.textContent = isOpen ? '✕' : '☰';
+      isMenuOpen = !isMenuOpen;
+      if (isMenuOpen) {
+        mobileMenu.classList.remove('max-h-0');
+        mobileMenu.classList.add('max-h-[400px]');
+        menuBtn.innerHTML = '<i data-lucide="x"></i>';
+      } else {
+        mobileMenu.classList.add('max-h-0');
+        mobileMenu.classList.remove('max-h-[400px]');
+        menuBtn.innerHTML = '<i data-lucide="menu"></i>';
+      }
+      lucide.createIcons();
     });
-    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      menuBtn.setAttribute('aria-expanded', 'false');
-      menuBtn.textContent = '☰';
-    }));
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        isMenuOpen = false;
+        mobileMenu.classList.add('max-h-0');
+        mobileMenu.classList.remove('max-h-[400px]');
+        menuBtn.innerHTML = '<i data-lucide="menu"></i>';
+        lucide.createIcons();
+      });
+    });
+
+    // Scroll Reveal Animation
     const revealItems = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(entries => {
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.12 });
+      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+      
       revealItems.forEach(item => observer.observe(item));
     } else {
       revealItems.forEach(item => item.classList.add('visible'));
     }
+
+    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('shadow-lg', 'bg-slate-950/90');
+        navbar.classList.remove('bg-slate-950/80');
+      } else {
+        navbar.classList.remove('shadow-lg', 'bg-slate-950/90');
+        navbar.classList.add('bg-slate-950/80');
+      }
+    });
   </script>
 </body>
 </html>
