@@ -73,6 +73,11 @@
     .social-link:hover{border-color:rgba(255,159,28,.5);transform:translateY(-2px)}
     .contact-box{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:clamp(25px,5vw,48px);border:1px solid rgba(255,159,28,.24);border-radius:25px;background:radial-gradient(ellipse at 100% 0%,rgba(255,159,28,.13),transparent 55%),var(--panel)}
     .contact-box p{color:var(--muted);max-width:550px;margin-top:12px}
+    .comments-panel{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));padding:clamp(20px,4vw,34px)}
+    .comments-panel .section-title{margin-bottom:10px}
+    .comments-description{color:var(--muted);margin:12px 0 24px;max-width:650px}
+    .giscus{min-height:120px}
+    .giscus-frame{width:100%}
     footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:.82rem}
     .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:16px}.footer-inner span{color:var(--accent2)}
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:translateY(0)}
@@ -93,7 +98,7 @@
       <a class="brand" href="#home">JOY<span>.</span></a>
       <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
       <div class="nav-links" id="navLinks">
-        <a href="#about">About</a><a href="#skills">Skills</a><a href="#interests">Interests</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+        <a href="#about">About</a><a href="#skills">Skills</a><a href="#interests">Interests</a><a href="#projects">Projects</a><a href="#comments">Comments</a><a href="#contact">Contact</a>
       </div>
     </nav>
   </div>
@@ -181,6 +186,32 @@
         <article class="panel project-card"><div class="project-art" aria-hidden="true">◈</div><div class="project-content"><div class="project-type">Personal website</div><h3>My Portfolio</h3><p>A responsive personal website introducing me, my interests, and the skills I'm developing.</p><a class="project-link" href="#home">You're viewing it ↗</a></div></article>
         <article class="panel project-card"><div class="project-art" aria-hidden="true">⌘</div><div class="project-content"><div class="project-type">In progress</div><h3>Coding Journey</h3><p>Learning the foundations of web development and working toward future projects.</p><a class="project-link" href="#skills">Explore my skills ↗</a></div></article>
         <article class="panel project-card"><div class="project-art" aria-hidden="true">✧</div><div class="project-content"><div class="project-type">Coming later</div><h3>Future Projects</h3><p>New ideas and completed projects will be showcased here as they take shape.</p><a class="project-link" href="#contact">Get in touch ↗</a></div></article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="comments">
+      <div class="section-head">
+        <div><div class="kicker">Join the conversation</div><h2 class="section-title">Leave a <span class="accent">comment.</span></h2></div>
+        <p class="section-intro">Have a thought or suggestion? Share it below. Comments are powered by Giscus and stored in GitHub Discussions.</p>
+      </div>
+      <div class="comments-panel">
+        <p class="comments-description">Please be respectful and keep comments friendly. You’ll need to authorize with GitHub to post.</p>
+        <div class="giscus"></div>
+        <script src="https://giscus.app/client.js"
+          data-repo="Joy456456/My-portfolio"
+          data-repo-id="R_kgDOVNhcLQ"
+          data-category="General"
+          data-category-id="DIC_kwDOVNhcLc4DI9fd"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async>
+        </script>
       </div>
     </section>
 
